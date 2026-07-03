@@ -221,7 +221,7 @@ body { margin: 0; }
       return h('button', {
         type: props.type || 'button',
         className: classes,
-        onClick: props.onClick,
+        onClick: props.onClick || props.onclick,
         children: props.children
       });
     }
@@ -234,7 +234,7 @@ body { margin: 0; }
           type: props.type || 'text',
           value: props.value || '',
           placeholder: props.placeholder || '',
-          onChange: props.onChange
+          onChange: props.onChange || props.onchange
         })
       ]);
     }
@@ -246,7 +246,7 @@ body { margin: 0; }
         h('select', {
           className: 'ds-select',
           value: props.value || '',
-          onChange: props.onChange,
+          onChange: props.onChange || props.onchange,
           children: options.map(function (o) {
             return h('option', { key: o.value, value: o.value, children: o.label });
           })
@@ -262,7 +262,7 @@ body { margin: 0; }
           rows: props.rows || 3,
           value: props.value || '',
           placeholder: props.placeholder || '',
-          onChange: props.onChange
+          onChange: props.onChange || props.onchange
         })
       ]);
     }
