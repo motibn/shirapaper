@@ -357,11 +357,11 @@ def seo_head_block() -> str:
 <meta property="og:url" content="{SITE_URL}/">
 <meta property="og:title" content="{SITE_TITLE}">
 <meta property="og:description" content="{SITE_DESC}">
-<meta property="og:image" content="{SITE_URL}/assets/hero.jpg">
+<meta property="og:image" content="{SITE_URL}/assets/hero-collage.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{SITE_TITLE}">
 <meta name="twitter:description" content="{SITE_DESC}">
-<meta name="twitter:image" content="{SITE_URL}/assets/hero.jpg">"""
+<meta name="twitter:image" content="{SITE_URL}/assets/hero-collage.webp">"""
 
 
 def shell_json_ld() -> str:
@@ -385,7 +385,7 @@ def shell_json_ld() -> str:
       "name": "שירה בנייר",
       "description": {json.dumps(SITE_DESC, ensure_ascii=False)},
       "url": {json.dumps(SITE_URL)},
-      "image": {json.dumps(SITE_URL + '/assets/hero.jpg')},
+      "image": {json.dumps(SITE_URL + '/assets/hero-collage.webp')},
       "telephone": "+972-50-4417031",
       "address": {{
         "@type": "PostalAddress",
