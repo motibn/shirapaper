@@ -20,6 +20,7 @@ UUID_STORY = "7ae7fe59-5dfd-45e4-bb28-4ddcc8f8bbff"
 UUID_HERO = "f526d5fb-2de1-482b-aaf4-876f068b75b7"
 UUID_DC = "bda35eb6-6e80-4ec3-b132-c58767827c3b"
 UUID_DS_LOADER = "0c485c21-e9aa-4bfa-a2f8-58fd6e45fde7"
+DS_BUNDLE_VERSION = "2"
 
 SITE_URL = "https://shirapaper.vercel.app"
 SITE_TITLE = "שירה בנייר | סדנאות עיצוב בנייר בצפון הגולן"
@@ -287,6 +288,23 @@ def decode_manifest_entry(entry: dict) -> bytes:
     return data
 
 
+def patch_ds_loader(manifest: dict) -> None:
+    """Bump _ds_bundle.js query param so browsers fetch updated design-system JS."""
+    entry = manifest.get(UUID_DS_LOADER)
+    if not entry:
+        return
+    loader = decode_manifest_entry(entry).decode("utf-8")
+    loader = re.sub(
+        r"s\.src = base \+ '/_ds_bundle\.js(?:\?v=\d+)?';",
+        f"s.src = base + '/_ds_bundle.js?v={DS_BUNDLE_VERSION}';",
+        loader,
+        count=1,
+    )
+    compressed = gzip.compress(loader.encode("utf-8"))
+    entry["data"] = base64.b64encode(compressed).decode("ascii")
+    entry["compressed"] = True
+
+
 def extract_and_optimize_images(manifest: dict) -> dict[str, str]:
     ASSETS.mkdir(parents=True, exist_ok=True)
     mapping = {
@@ -491,6 +509,7 @@ def main() -> None:
     for uuid in (UUID_LOGO, UUID_STORY, UUID_HERO):
         manifest.pop(uuid, None)
 
+    patch_ds_loader(manifest)
     tpl = patch_template(tpl, image_paths)
     content = patch_shell(content)
     content = patch_bundler(content)
