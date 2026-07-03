@@ -1,0 +1,18 @@
+:root {
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 28px;
+  --radius-pill: 999px;
+  --shadow-xs: 0 1px 2px rgba(42, 31, 48, 0.06);
+  --shadow-sm: 0 2px 8px rgba(42, 31, 48, 0.08);
+  --shadow-md: 0 4px 16px rgba(42, 31, 48, 0.1);
+  --shadow-lg: 0 8px 32px rgba(42, 31, 48, 0.12);
+  --shadow-xl: 0 16px 48px rgba(42, 31, 48, 0.16);
+  --shadow-pink: 0 8px 24px rgba(194, 61, 122, 0.25);
+  --dur-fast: 0.15s;
+  --dur-base: 0.25s;
+  --dur-slow: 0.4s;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}

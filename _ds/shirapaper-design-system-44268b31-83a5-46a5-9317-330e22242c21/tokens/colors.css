@@ -1,0 +1,27 @@
+:root {
+  --white: #ffffff;
+  --pink-200: #f8d9e8;
+  --pink-300: #efb8d4;
+  --pink-600: #c23d7a;
+  --purple-500: #8b3f9b;
+  --purple-600: #6f2c79;
+  --purple-700: #5a2370;
+  --gold-300: #fde4a8;
+  --gold-500: #fab847;
+  --gold-600: #e09a2e;
+  --blue-300: #b8d4f0;
+  --blue-500: #5b9bd5;
+  --blue-600: #3d7ab8;
+  --text-body: #3d3340;
+  --text-muted: #7a6e82;
+  --text-strong: #2a1f30;
+  --text-on-dark: #fce8f2;
+  --surface-page: #faf7f9;
+  --surface-sunken: #f3edf2;
+  --surface-card: #ffffff;
+  --surface-dark: #3d1f4a;
+  --border-subtle: rgba(111, 44, 121, 0.12);
+  --gradient-brand: linear-gradient(135deg, #fab847 0%, #e8a6c1 50%, #6f2c79 100%);
+  --gradient-brand-soft: linear-gradient(135deg, rgba(250,184,71,.15) 0%, rgba(232,166,193,.15) 50%, rgba(111,44,121,.12) 100%);
+  --gradient-text: linear-gradient(135deg, #c23d7a 0%, #8b3f9b 50%, #6f2c79 100%);
+}
