@@ -21,7 +21,7 @@ UUID_HERO = "f526d5fb-2de1-482b-aaf4-876f068b75b7"
 UUID_DC = "bda35eb6-6e80-4ec3-b132-c58767827c3b"
 UUID_DS_LOADER = "0c485c21-e9aa-4bfa-a2f8-58fd6e45fde7"
 
-SITE_URL = "https://shirapaper-eta.vercel.app"
+SITE_URL = "https://shirapaper.vercel.app"
 SITE_TITLE = "שירה בנייר | סדנאות עיצוב בנייר בצפון הגולן"
 SITE_DESC = "סדנאות וחוגי עיצוב בנייר בקלע אלון. סדנאות משפחתיות, קבוצות ואירועים. הרשמה בוואטסאפ."
 
@@ -296,21 +296,30 @@ def extract_and_optimize_images(manifest: dict) -> dict[str, str]:
     }
     paths: dict[str, str] = {}
 
-    for uuid, filename in mapping.items():
-        out = ASSETS / filename
-        out.write_bytes(decode_manifest_entry(manifest[uuid]))
-        paths[uuid] = f"assets/{filename}"
+    if all(uuid in manifest for uuid in mapping):
+        for uuid, filename in mapping.items():
+            out = ASSETS / filename
+            out.write_bytes(decode_manifest_entry(manifest[uuid]))
+            paths[uuid] = f"assets/{filename}"
 
-    gallery_sources = [
-        ("g1-album.jpg", "story.jpg"),
-        ("g2-calendar.jpg", "hero.jpg"),
-        ("g3-box.jpg", "story.jpg"),
-        ("g4-group.jpg", "hero.jpg"),
-        ("g5-cards.jpg", "story.jpg"),
-        ("g6-family.jpg", "hero.jpg"),
-    ]
-    for name, src_name in gallery_sources:
-        shutil.copyfile(ASSETS / src_name, ASSETS / name)
+        gallery_sources = [
+            ("g1-album.jpg", "story.jpg"),
+            ("g2-calendar.jpg", "hero.jpg"),
+            ("g3-box.jpg", "story.jpg"),
+            ("g4-group.jpg", "hero.jpg"),
+            ("g5-cards.jpg", "story.jpg"),
+            ("g6-family.jpg", "hero.jpg"),
+        ]
+        for name, src_name in gallery_sources:
+            shutil.copyfile(ASSETS / src_name, ASSETS / name)
+    else:
+        hero = "assets/hero.webp" if (ASSETS / "hero.webp").exists() else "assets/hero.jpg"
+        story = "assets/story.webp" if (ASSETS / "story.webp").exists() else "assets/story.jpg"
+        paths = {
+            UUID_LOGO: "assets/logo.png",
+            UUID_STORY: story,
+            UUID_HERO: hero,
+        }
 
     for img in ASSETS.glob("*.jpg"):
         subprocess.run(
